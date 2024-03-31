@@ -11,10 +11,10 @@ public class WeightedQuickUnionUF {
         this.components = n;
         this.parent = new int[n];
         this.rank = new int[n];
-        initParent();
+        initArrays();
     }
 
-    private void initParent() {
+    private void initArrays() {
         for (int i = 0; i < parent.length; i++) {
             parent[i] = i;
             rank[i] = 1;
@@ -50,6 +50,10 @@ public class WeightedQuickUnionUF {
             p = parent[p];
         }
         return p;
+    }
+
+    public int getComponents() {
+        return components;
     }
 
     public static void main(String[] args) {
