@@ -1,6 +1,6 @@
 package stacksandqueues;
 
-public interface Stack<K> {
+public interface StackImpl<K> {
 
     K pop();
 

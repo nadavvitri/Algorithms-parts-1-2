@@ -1,11 +1,13 @@
 package stacksandqueues;
 
-public class LinkedListStack implements Stack<String> {
-    private Node<String> first;
-    private int size = 0;
+public class LinkedListQueueImpl implements QueueImpl<String> {
+
+    Node<String> first = new Node<>("dummy");
+    Node<String> last = new Node<>("dummy");
+    int size = 0;
 
     @Override
-    public String pop() {
+    public String dequeue() {
         if (isEmpty()) {
             return "Empty!";
         }
@@ -15,10 +17,13 @@ public class LinkedListStack implements Stack<String> {
     }
 
     @Override
-    public void push(String value) {
+    public void enqueue(String value) {
         Node<String> node = new Node<>(value);
-        node.next = first;
-        first = node;
+        last.next = node;
+        last = node;
+        if (isEmpty()) {
+            first = last;
+        }
         size++;
     }
 
@@ -33,8 +38,8 @@ public class LinkedListStack implements Stack<String> {
     }
 
     private static class Node<K> {
-        Node<K> next;
         K value;
+        Node<K> next;
 
         public Node(K value) {
             this.value = value;
@@ -42,13 +47,13 @@ public class LinkedListStack implements Stack<String> {
     }
 
     public static void main(String[] args) {
-        LinkedListStack linkedListStack = new LinkedListStack();
+        LinkedListQueueImpl linkedListQueue = new LinkedListQueueImpl();
         String tobe = "to be or not to - be - - that - - - is";
         for (String word : tobe.split(" ")) {
             if (word.equals("-")) {
-                System.out.println(linkedListStack.pop());
+                System.out.println(linkedListQueue.dequeue());
             } else {
-                linkedListStack.push(word);
+                linkedListQueue.enqueue(word);
             }
         }
     }

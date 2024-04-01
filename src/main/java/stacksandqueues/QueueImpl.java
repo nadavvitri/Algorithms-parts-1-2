@@ -1,6 +1,6 @@
 package stacksandqueues;
 
-public interface Queue<K> {
+public interface QueueImpl<K> {
 
     K dequeue();
 

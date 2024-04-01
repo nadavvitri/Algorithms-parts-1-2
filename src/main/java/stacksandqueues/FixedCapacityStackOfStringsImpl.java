@@ -1,11 +1,11 @@
 package stacksandqueues;
 
-public class ResizingArrayStack implements Stack<String> {
+public class FixedCapacityStackOfStringsImpl implements StackImpl<String> {
     private String[] s;
     private int size = 0;
 
-    public ResizingArrayStack() {
-        this.s = new String[1];
+    public FixedCapacityStackOfStringsImpl(int capacity) {
+        this.s = new String[capacity];
     }
 
     @Override
@@ -19,18 +19,10 @@ public class ResizingArrayStack implements Stack<String> {
     @Override
     public void push(String value) {
         if (size == s.length) {
-            resize(size * 2);
+            return;
         }
         s[size] = value;
         size++;
-    }
-
-    private void resize(int capacity) {
-        String[] copy = new String[capacity];
-        for (int i = 0; i < size; i++) {
-            copy[i] = s[i];
-        }
-        s = copy;
     }
 
     @Override
@@ -44,13 +36,13 @@ public class ResizingArrayStack implements Stack<String> {
     }
 
     public static void main(String[] args) {
-        ResizingArrayStack resizingArrayStack = new ResizingArrayStack();
+        FixedCapacityStackOfStringsImpl fixedCapacityStackOfStrings = new FixedCapacityStackOfStringsImpl(10);
         String tobe = "to be or not to - be - - that - - - is";
         for (String word : tobe.split(" ")) {
             if (word.equals("-")) {
-                System.out.println(resizingArrayStack.pop());
+                System.out.println(fixedCapacityStackOfStrings.pop());
             } else {
-                resizingArrayStack.push(word);
+                fixedCapacityStackOfStrings.push(word);
             }
         }
     }
