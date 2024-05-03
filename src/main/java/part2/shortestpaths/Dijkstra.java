@@ -23,7 +23,7 @@ public class Dijkstra {
         }
         Map<Integer, List<DirectedEdge>> nodeToNodes = getAsMap(directedEdges, n);
         distTo[source] = 0;
-        pq.add(new Node(0, 0.0));
+        pq.add(new Node(source, 0.0));
         while (!pq.isEmpty()) {
             int v = pq.poll().v;
             for (DirectedEdge edge : nodeToNodes.get(v)) {
@@ -97,6 +97,8 @@ public class Dijkstra {
                 new DirectedEdge(6, 0, 0.58),
                 new DirectedEdge(6, 4, 0.93));
         Dijkstra dijkstra = new Dijkstra(directedEdges, n, 0);
-        System.out.println(dijkstra.pathTo(6));
+        for (int i = 0; i < n; i++) {
+            System.out.println("0 to " + i + " (" + dijkstra.pathTo(i) + ")");
+        }
     }
 }
