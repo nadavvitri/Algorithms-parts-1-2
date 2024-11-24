@@ -16,9 +16,9 @@ public class LinkedListStackImpl implements StackImpl<String> {
 
     @Override
     public void push(String value) {
-        Node<String> node = new Node<>(value);
-        node.next = first;
-        first = node;
+        Node<String> oldFirst = first;
+        first = new Node<>(value);
+        first.next = oldFirst;
         size++;
     }
 

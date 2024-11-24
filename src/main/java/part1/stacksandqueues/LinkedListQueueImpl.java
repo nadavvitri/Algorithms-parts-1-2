@@ -2,8 +2,7 @@ package part1.stacksandqueues;
 
 public class LinkedListQueueImpl implements QueueImpl<String> {
 
-    Node<String> first = new Node<>("dummy");
-    Node<String> last = new Node<>("dummy");
+    Node<String> first, last;
     int size = 0;
 
     @Override
@@ -13,16 +12,21 @@ public class LinkedListQueueImpl implements QueueImpl<String> {
         }
         String value = first.value;
         first = first.next;
+        size--;
+        if (isEmpty()) {
+            last = first;
+        }
         return value;
     }
 
     @Override
     public void enqueue(String value) {
-        Node<String> node = new Node<>(value);
-        last.next = node;
-        last = node;
+        Node<String> oldLast = last;
+        last = new Node<>(value);
         if (isEmpty()) {
             first = last;
+        } else {
+            oldLast.next = last;
         }
         size++;
     }
